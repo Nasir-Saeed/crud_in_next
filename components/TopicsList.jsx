@@ -2,15 +2,18 @@ import RemoveBtn from '@/components/RemoveBtn'
 import Link from 'next/link'
 import { HiPencilAlt } from 'react-icons/hi'
 
+
 const getTopics = async () => {
     try {
         const res = await fetch("http://localhost:3000/api/topics", { cache: "no-store" });
         if (!res.ok) {
             throw new Error("Error in Fetching Data");
         }
-        return res.json();
+        const data = await res.json();
+        return data
     } catch (error) {
         console.log("Error: ", error)
+        return { topics: [] };
     }
 }
 
@@ -27,10 +30,11 @@ export default async function TopicsList() {
                             <h2>{t.description}</h2>
                         </div>
                         <div className='flex gap-2'>
-                            <RemoveBtn id={t._id}/>
+                            <RemoveBtn id={t._id} />
                             <Link href={`/editTopic/${t._id}`}>
                                 <HiPencilAlt size={24} />
                             </Link>
+                         
                         </div>
                     </div>
                 ))

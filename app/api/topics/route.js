@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import dbConnect from '@/libs/dbConnect'
 import Topic from '@/models/topic'
 
-
-
 export const POST = async (req) => {
     const { title, description } = await req.json();
     await dbConnect();
@@ -25,6 +23,5 @@ export const DELETE = async (req) => {
     await dbConnect();
     await Topic.findByIdAndDelete(id)
     return NextResponse.json({ message: "Topic Deleted" }, { status: 200 });
-
 }
 

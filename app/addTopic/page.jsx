@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
 export default function AddTopic() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -11,9 +10,7 @@ export default function AddTopic() {
     const router = useRouter();
 
     let handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log("Form is Submitted");
-
+        e.preventDefault()
         try {
             const res = await fetch("http://localhost:3000/api/topics", {
                 method: "POST",
@@ -24,8 +21,8 @@ export default function AddTopic() {
             });
 
             if (res.ok) {
-                router.refresh()
-                router.push("/")
+                router.refresh();
+                router.push("/");
             } else {
                 throw new Error("Failed to create a topic");
             }
